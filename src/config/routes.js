@@ -1,3 +1,9 @@
+/*
+ * @file: routes.js
+ * @description: Contains all routes registered.
+ * @date: 9.Oct.2018
+ * @author: Parshant Nagpal
+ * */
 import {Navigation} from 'react-native-navigation';
 
 export const registerScreens=(store, Provider) =>{

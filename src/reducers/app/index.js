@@ -1,3 +1,11 @@
+/*
+ * @file: app.js
+ * @description: Contains the App Reducer.
+ * @date: 9.Oct.2018
+ * @author: Parshant Nagpal
+ * */
+
+
 import * as types from "../../actionTypes";
 import Immutable from "seamless-immutable";
 

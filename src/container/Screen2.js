@@ -1,3 +1,10 @@
+/*
+ * @file: Screen2.js
+ * @description: Contains the Screen2 Container.
+ * @date: 9.Oct.2018
+ * @author: Parshant Nagpal
+ * */
+
 import React from 'react'
 import {
   View,

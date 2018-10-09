@@ -1,3 +1,10 @@
+/*
+ * @file: Navigation.js
+ * @description: Contains the navigation Stacks.
+ * @date: 9.Oct.2018
+ * @author: Parshant Nagpal
+ * */
+
 import { Navigation } from 'react-native-navigation'
 
 export const goToAuth = () => Navigation.setRoot({
