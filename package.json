@@ -1,0 +1,33 @@
+{
+  "name": "reactNativeBoilerPlateV2RN55",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
+    "android-build": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "react": "16.3.1",
+    "react-native": "0.55.4",
+    "react-native-firebase": "^4.3.8",
+    "react-native-navigation": "^2.0.2567",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^4.8.3",
+    "redux-thunk": "^2.3.0",
+    "seamless-immutable": "^7.1.4"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "babel-preset-react-native": "4.0.1",
+    "jest": "23.6.0",
+    "react-test-renderer": "16.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
