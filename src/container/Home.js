@@ -20,6 +20,7 @@ import * as AppAction from '../actions'
 import {removeListeners} from '../utilities/listeners';
 import { handleBackPress } from '../utilities/BackButtonHandling';
 import {Navigation} from 'react-native-navigation';
+import firebase from 'react-native-firebase';
 let removeListener = true;
  class Home extends React.Component {
 	/*
@@ -51,10 +52,17 @@ let removeListener = true;
     };
   }
 
-  logout = () => {
+  logout = async() => {
     removeListener = false;
-    this.props.dispatch(AppAction.logOut());
-    goToAuth()
+    try{
+      const reponse =  await firebase.auth().signOut();
+      this.props.dispatch(AppAction.logOut());
+      goToAuth()
+    }
+   catch(err){
+      console.log('error signing up: ', err.message)
+      alert(err.message);
+    }
   }
   render() {
     return (

@@ -12,9 +12,13 @@ import {
   Text,
   TextInput,
   StyleSheet
-} from 'react-native'
-
-export default class SignUp extends React.Component {
+} from 'react-native';
+import firebase from 'react-native-firebase';
+import * as AppAction from '../actions';
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { goHome } from '../config/navigation'
+ class SignUp extends React.Component {
   state = {
     username: '', password: '', email: '', phone_number: ''
   }
@@ -22,23 +26,37 @@ export default class SignUp extends React.Component {
     this.setState({ [key]: val })
   }
   signUp = async () => {
-    const { username, password, email, phone_number } = this.state
+    const { password, email } = this.state;
+    if(email.trim() == ''){
+      alert('Please Enter email Id');
+      return;
+    }
+    if(password.trim() == ''){
+      alert('Please Enter Password');
+      return;
+    }
     try {
+     const data = await firebase.auth().createUserWithEmailAndPassword(email,password);
       // here place your signup logic
-      console.log('user successfully signed up!: ', success)
+      console.log('user successfully signed up!: ', data)
+      // alert('User Created Successfully')
+      // this.props.appAction.pop(this.props.componentId);
+      this.props.appAction.login();
+      goHome();
     } catch (err) {
-      console.log('error signing up: ', err)
+      console.log('error signing up: ', err.message)
+      alert(err.message);
     }
   }
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
+         <TextInput
           style={styles.input}
-          placeholder='Username'
+          placeholder='Email'
           autoCapitalize="none"
           placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('username', val)}
+          onChangeText={val => this.onChangeText('email', val)}
         />
         <TextInput
           style={styles.input}
@@ -48,20 +66,6 @@ export default class SignUp extends React.Component {
           placeholderTextColor='white'
           onChangeText={val => this.onChangeText('password', val)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Email'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('email', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Phone Number'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('phone_number', val)}
-        />
         <Button
           title='Sign Up'
           onPress={this.signUp}
@@ -70,7 +74,9 @@ export default class SignUp extends React.Component {
     )
   }
 }
-
+const mapDispatchToProps = dispatch => ({
+  appAction : bindActionCreators(AppAction,dispatch)  
+})
 const styles = StyleSheet.create({
   input: {
     width: 350,
@@ -87,3 +93,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+export default connect(null,mapDispatchToProps)(SignUp);

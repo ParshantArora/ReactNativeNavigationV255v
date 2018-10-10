@@ -15,11 +15,23 @@ import {
 } from 'react-native'
 
 import { goToAuth, goHome } from '../config/navigation'
-
+import firebase from 'react-native-firebase';
 export default class Loader extends React.Component {
   
+  componentDidMount(){
+    this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
+      console.log("authstate123", user)
+      if(user == null){
+        goToAuth(); 
+      }else{
+        goHome();
+      }
+    
+     });
+  }
   componentWillUnmount(){
     console.log('unmount')
+    this.unsubscriber();
   }
 
   render() {

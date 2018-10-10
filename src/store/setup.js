@@ -34,11 +34,11 @@ export default function setup() {
   }
   persistStore(store, { whitelist, storage: AsyncStorage }, () => {
     console.log("newstore", store.getState().app.root);
-    if (store.getState().user.isLoggedIn) {
-          goHome()
-        } else {
-          goToAuth()
-        }
+    // if (store.getState().user.isLoggedIn) {
+    //       goHome()
+    //     } else {
+    //       goToAuth()
+    //     }
     // on app loading the persit store loads and we have route from here
     // startApp(store.getState().app.root);
   });

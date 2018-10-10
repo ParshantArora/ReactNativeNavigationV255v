@@ -6,7 +6,7 @@
  * */
 import React, { Fragment } from 'react'
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import {
   View,
   Text,
@@ -27,7 +27,7 @@ class SignIn extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username: '', password: ''
+      email: '', password: ''
     }
     this.signUp = this.signUp.bind(this);
   }
@@ -38,13 +38,11 @@ class SignIn extends React.Component {
     }  
   }
   componentWillMount(){
-    firebase.auth().signInAnonymously()
-    .then((res) => {
-     console.log("response",res)
-    });
-    this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
-     console.log("authstate", user)
-    });
+    // firebase.auth().signInAnonymously()
+    // .then((res) => {
+    //  console.log("response",res)
+    // });
+ 
   }
   componentWillUnmount() {
     if (this.unsubscriber) {
@@ -54,12 +52,27 @@ class SignIn extends React.Component {
   onChangeText = (key, value) => {
     this.setState({ [key]: value })
   }
-  signIn = () => {
-    const { username, password } = this.state;
+  signIn = async() => {
+    const { email, password } = this.state;
+    if(email.trim() == ''){
+      alert('Please Enter email Id');
+      return;
+    }
+    if(password.trim() == ''){
+      alert('Please Enter Password');
+      return;
+    }
     console.log(this.props,AppAction)
-     removeListener = false;
-     this.props.dispatch(AppAction.login());
-    goHome();
+    try {
+    const reponse = await firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password);
+          this.props.dispatch(AppAction.login());
+          goHome();
+          // here place your signup logic
+          console.log('user successfully signed in: ', reponse)
+        } catch (err) {
+          console.log('error signing up: ', err.message)
+          alert(err.message);
+        }
   }
   signUp(){
     this.props.dispatch(AppAction.pushTParticulatScreen(this.props.componentId,'SignUp'));
@@ -69,11 +82,11 @@ class SignIn extends React.Component {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder='Username'
+          placeholder='Email'
           autoCapitalize="none"
           autoCorrect={false}
           placeholderTextColor='white'
-          onChangeText={val => this.onChangeText('username', val)}
+          onChangeText={val => this.onChangeText('email', val)}
         />
         <TextInput
           style={styles.input}

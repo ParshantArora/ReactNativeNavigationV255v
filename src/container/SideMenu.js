@@ -50,10 +50,10 @@ import * as AppAction from '../actions';
         <Text style={styles.welcome}>SideMenu</Text>
        </View> 
        <View style={styles.text}>
-       <TouchableOpacity onPress={()=>{this.setScrenStack("Home",true)}}><Text style={styles.welcome}>SecondPage</Text></TouchableOpacity>
+       <TouchableOpacity onPress={()=>{this.setScrenStack("Home",true)}}><Text style={styles.welcome}>Home</Text></TouchableOpacity>
        </View> 
        <View style={styles.text}>
-       <TouchableOpacity onPress={()=>{this.setScrenStack("Loader",false)}}><Text style={styles.welcome}>SecondPage</Text></TouchableOpacity>
+       <TouchableOpacity onPress={()=>{this.setScrenStack("Screen2",false)}}><Text style={styles.welcome}>SecondPage</Text></TouchableOpacity>
        </View> 
        <View style={styles.text}>
        <TouchableOpacity onPress={()=>{this.hideSideMenu()}}><Text style={styles.welcome}>Close</Text></TouchableOpacity>
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor : '#ffffff'
   },
   text : {
     height : height*10/100,
