@@ -14,6 +14,8 @@ import com.reactnativenavigation.react.ReactGateway;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-- Add this line
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 import io.invertase.firebase.auth.RNFirebaseAuthPackage; // <-- Add this line
+import io.invertase.firebase.database.RNFirebaseDatabasePackage; // <-- Add this line
+
 
 
 
@@ -46,7 +48,8 @@ public class MainApplication extends NavigationApplication {
                                     new RNFirebasePackage(),
                                     new RNFirebaseNotificationsPackage(),
                                     new RNFirebaseMessagingPackage(),
-                                    new RNFirebaseAuthPackage()
+                                    new RNFirebaseAuthPackage(),
+                                    new RNFirebaseDatabasePackage()
 
                             );
         }

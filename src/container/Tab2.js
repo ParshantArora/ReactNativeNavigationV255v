@@ -11,13 +11,44 @@ import {
   StyleSheet,
   AsyncStorage
 } from 'react-native'
-
+import firebase from 'react-native-firebase';
 import { goToAuth, goHome } from '../config/navigation'
-
+let usersRef = firebase.database().ref('/todos');
 export default class Tab2 extends React.Component {
   
+  componentDidMount(){
+    console.log("firebase",firebase.database().ref('todos'))
+ 
+    usersRef.once('value').then(function(s){console.log("data123",s.val());})
+
+    usersRef.on('value',(data)=>{
+      console.log("datatatatat",data)
+    })
+usersRef.push({
+        Task : 'do it today',
+        name : 'Parshant',
+        status : 'pending'
+    },(resp)=>{
+  console.log("resp",resp)
+    })
+//     firebase.database().ref('/todos').push({
+//       Task : 'do it today',
+//       name : 'Parshant',
+//       status : 'pending'
+//   },(resp)=>{
+// conaole.log("resp",resp)
+//   })
+//   var messageListRef = firebase.database().ref('message_list');
+//   var newMessageRef = messageListRef.push();
+//   firebase.database().ref('/todos').once('value',(data)=>{
+//     console.log('data',data)
+//   })
+  }
   componentWillUnmount(){
     console.log('unmount')
+    usersRef.off('value',()=>{
+console.log("datahjdsghjdgsfg")
+    })
   }
 
   render() {
